@@ -19,7 +19,6 @@ void changeDirection(int newDirection) {
 
 void setup() {
   u8g2.begin();
-  Serial.begin(9600);
   pinMode(up, INPUT);
   pinMode(down, INPUT);
   pinMode(left, INPUT);
@@ -31,15 +30,16 @@ void loop() {
   long currentMillis = millis();
 
   // get button inputs
-  if (digitalRead(up) == LOW)
+  if (digitalRead(up) == LOW && direction != 2) {
+    changeDirection(1);
   }
-  if (digitalRead(down) == LOW) {
+  if (digitalRead(down) == LOW && direction != 1) {
     changeDirection(2);
   }
-  if (digitalRead(left) == LOW) {
+  if (digitalRead(left) == LOW && direction != 4) {
     changeDirection(3);
   }
-  if (digitalRead(right) == LOW) {
+  if (digitalRead(right) == LOW && direction != 3) {
     changeDirection(4);
   }
 
@@ -62,6 +62,5 @@ void loop() {
     }
     u8g2.drawPixel(xCoord, yCoord);
     u8g2.sendBuffer();
-    Serial.println(xCoord + yCoord);
   }
 }
