@@ -2,14 +2,17 @@
 Snake game for Arduino
 
 Current state:
-- simulating using wokwi
-- circuit designed
-- very early version of code
+- circuit prototype complete
+- code is incomplete but getting there
+- there's not a lot of ram to work with on the nano
 
 TODO:
-- add a border
-- make points 3x3 pixels instead of 1x1 because they're tiny
+- length increase with score
 - make and upload circuit diagram
+- what happens when we die?
+- don't allow out of bounds
+- figure out what to do about memory constraints
 
 Notes:
-- currently planning on using a nano with ssd1306 128x64 OLED
+- this runs on an arduino nano with an ssd1315 oled screen using i2c
+- four buttons wired up to digital pins with the internal pullup resistor to control movement(pins in code comments)
