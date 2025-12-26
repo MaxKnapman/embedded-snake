@@ -8,9 +8,9 @@ long previousMillis = 0;
 char direction = 'r'; //r l u d character values for direction
 int ycoord = 1;
 int xcoord = 1;
-int length = 0;
-int ysegments[10];
-int xsegments[10];
+int length = 1;
+int ysegments[10] {1}; //max length 10 for now
+int xsegments[10] {1};
 int fruitx;
 int fruity;
 
@@ -33,6 +33,12 @@ void move(char direction) {
     length++;
     fruit();
   }
+  for (int i = 9; i > 0; i--) {
+    xsegments[i] = xsegments[i - 1];
+    ysegments[i] = ysegments[i - 1];
+  }
+  xsegments[0] = xcoord;
+  ysegments[0] = ycoord;
 }
 
 void fruit() {
@@ -70,7 +76,9 @@ void loop() {
   if (currentMillis - previousMillis >= 500) {
     previousMillis = currentMillis;
     move(direction);
-    u8g2.drawBox((xcoord * 4), (ycoord * 4), 4, 4);
+    for (int i = 0; i < length; i++) {
+      u8g2.drawBox((xsegments[i] * 4), (ysegments[i] * 4), 4, 4);
+    }
     u8g2.drawBox((fruitx * 4), (fruity * 4), 4, 4);
     u8g2.sendBuffer();
   }
