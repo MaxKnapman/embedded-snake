@@ -7,7 +7,6 @@ Current state:
 - there's not a lot of ram to work with on the nano
 
 TODO:
-- length increase with score
 - make and upload circuit diagram
 - what happens when we die?
 - don't allow out of bounds
