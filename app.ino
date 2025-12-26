@@ -6,44 +6,42 @@ U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0);
 
 long previousMillis = 0;
 char direction = 'r'; //r l u d character values for direction
-int ycoord = 1;
-int xcoord = 1;
 int length = 1;
-int ysegments[10] {1}; //max length 10 for now
-int xsegments[10] {1};
-int fruitx;
-int fruity;
+int y_segments[10] {1}; //max length 10 for now
+int x_segments[10] {1};
+int fruit_x_coord;
+int fruit_y_coord;
 
 void move(char direction) {
-  switch (direction) {
-    case 'l':
-      xcoord -= 1;
-      break;
-    case 'r':
-      xcoord += 1;
-      break;
-    case 'u':
-      ycoord -= 1;
-      break;
-    case 'd':
-      ycoord += 1;
-      break;
-  }
-  if (xcoord == fruitx && ycoord == fruity) {
+  if (x_segments[0] == fruit_x_coord && y_segments[0] == fruit_y_coord) { //increase length
     length++;
     fruit();
   }
-  for (int i = 9; i > 0; i--) {
-    xsegments[i] = xsegments[i - 1];
-    ysegments[i] = ysegments[i - 1];
+
+  for (int i = 9; i > 0; i--) { //shunt segments to the right
+    x_segments[i] = x_segments[i - 1];
+    y_segments[i] = y_segments[i - 1];
   }
-  xsegments[0] = xcoord;
-  ysegments[0] = ycoord;
+
+  switch (direction) { //reposition head of snake
+    case 'l':
+      x_segments[0] -= 1;
+      break;
+    case 'r':
+      x_segments[0] += 1;
+      break;
+    case 'u':
+      y_segments[0] -= 1;
+      break;
+    case 'd':
+      y_segments[0] += 1;
+      break;
+  }
 }
 
-void fruit() {
-  fruitx = rand() % 32;
-  fruity = rand() % 16;
+void fruit() { //randomly spawn fruit
+  fruit_x_coord = rand() % 32;
+  fruit_y_coord = rand() % 16;
 }
 
 void setup() {
@@ -77,9 +75,9 @@ void loop() {
     previousMillis = currentMillis;
     move(direction);
     for (int i = 0; i < length; i++) {
-      u8g2.drawBox((xsegments[i] * 4), (ysegments[i] * 4), 4, 4);
+      u8g2.drawBox((x_segments[i] * 4), (y_segments[i] * 4), 4, 4);
     }
-    u8g2.drawBox((fruitx * 4), (fruity * 4), 4, 4);
+    u8g2.drawBox((fruit_x_coord * 4), (fruit_y_coord * 4), 4, 4);
     u8g2.sendBuffer();
   }
 }
