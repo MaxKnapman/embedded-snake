@@ -63,7 +63,7 @@ void loop() {
   u8g2.clearBuffer();
   long currentMillis = millis();
 
-  if (digitalRead(2) == LOW && direction != 'd') {
+  if (digitalRead(2) == LOW && direction != 'd') { // u turns not allowed
     direction = 'u';
   }
   if (digitalRead(3) == LOW && direction != 'u') {
@@ -80,7 +80,7 @@ void loop() {
     previousMillis = currentMillis;
     move(direction);
     for (int i = 0; i < length; i++) {
-      u8g2.drawBox((x_segments[i] * 8), (y_segments[i] * 8), 8, 8);
+      u8g2.drawBox(((x_segments[i] * 8) + 1), ((y_segments[i] * 8) + 1), 6, 6); // cells are 8x8 pixels so coords need to be 8x
     }
     u8g2.drawBox((fruit_x_coord * 8), (fruit_y_coord * 8), 8, 8);
     u8g2.sendBuffer();
