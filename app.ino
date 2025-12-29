@@ -25,16 +25,36 @@ void move(char direction) {
 
   switch (direction) { //reposition head of snake
     case 'l':
-      x_segments[0] -= 1;
+      if (x_segments[0] == 0) {
+        x_segments[0] = 15;
+      }
+      else {
+        x_segments[0] -= 1;
+      }
       break;
     case 'r':
-      x_segments[0] += 1;
+      if (x_segments[0] == 15) {
+        x_segments[0] = 0;
+      }
+      else {
+        x_segments[0] += 1;
+      }
       break;
     case 'u':
-      y_segments[0] -= 1;
+      if (y_segments[0] == 0) {
+        y_segments[0] = 7;
+      }
+      else {
+        y_segments[0] -= 1;
+      }
       break;
     case 'd':
-      y_segments[0] += 1;
+      if (y_segments[0] == 7) {
+        y_segments[0] = 0;
+      }
+      else {
+        y_segments[0] += 1;
+      }
       break;
   }
 }
