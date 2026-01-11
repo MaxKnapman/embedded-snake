@@ -37,6 +37,12 @@ void move(char direction) {
       (y_segments[0] == 7) ? y_segments[0] = 0 : y_segments[0]++;
       break;
   }
+
+  for (int i = 1; i < length; i++) {
+    if (x_segments[i] == x_segments[0] && y_segments[i] == y_segments[0]) {
+      perish();
+    }
+  }
 }
 
 void spawn_fruit() { //randomly spawn fruit
@@ -47,6 +53,11 @@ void spawn_fruit() { //randomly spawn fruit
       spawn_fruit();
     }
   }
+}
+
+void perish() {
+  u8g2.clearDisplay();
+  exit(0);
 }
 
 void setup() {
