@@ -3,12 +3,11 @@ Snake game for Arduino
 
 Current state:
 - circuit prototype complete
-- code is incomplete but getting there
+- all the main functions are there (moving, growing, dying) just need to clean it up a bit
 - there's not a lot of ram to work with on the nano
 
 TODO:
 - make and upload circuit diagram
-- what happens when we die?
 - figure out what to do about memory constraints
 
 Notes:
